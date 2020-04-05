@@ -7,6 +7,7 @@ public class EntityTrackerMapIcon : MonoBehaviour {
     [SerializeField]
     private Transform Tracking;
 
+    public Vector2 mapScale;
     private RectTransform rect;
 
     void Start () {
@@ -17,8 +18,8 @@ public class EntityTrackerMapIcon : MonoBehaviour {
         rect.localPosition = (Vector3) TerrainToMap (Tracking.position);
     }
 
-    public static Vector2 TerrainToMap (Vector2 pos) {
-        var terrainSize = new Vector2(8.7f, 8.7f) * 6;
+    public Vector2 TerrainToMap (Vector2 pos) {
+        var terrainSize = new Vector2(8.7f * mapScale.x, 8.7f * mapScale.y);
         var mapSize = new Vector2 (300, 300); // in pixels
         
         //pos += terrainSize * 0.5f;

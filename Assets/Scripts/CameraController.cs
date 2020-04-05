@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
     [SerializeField]
-    private Transform Tracking;
+    private Transform Target;
+    [SerializeField]
+    private float damp;
 
-    void LateUpdate () {
-        var newPos = Vector3.Lerp (transform.position, Tracking.position, 0.03f);
-        newPos.z = transform.position.z;
-        transform.position = newPos;
+    private Vector3 velocity;
+    
+
+    void Update () {
+        if (Target) {
+            Vector3 dest = new Vector3(Target.position.x, Target.position.y, transform.position.z);
+            transform.position = Vector3.SmoothDamp (transform.position, dest, ref velocity, damp);
+        }
     }
 }
