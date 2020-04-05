@@ -18,6 +18,15 @@ public class PickupController : MonoBehaviour {
     }
 
     void Update() {
-        transform.position += new Vector3(0, Mathf.Sin(Time.deltaTime*2), 0);
+        transform.position += new Vector3(0, Mathf.Sin(Time.time*3)*0.005f, 0);
+    }
+
+    void OnTriggerEnter2D(Collider2D col) {
+        Debug.Log("PICKUP");
+        if (col.CompareTag("character")) {
+            player.Pickup((int)type);
+            if (type == PickupType.Heart && player.health == 4) return;
+            Destroy(gameObject);
+        }
     }
 }

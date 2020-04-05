@@ -61,8 +61,10 @@ public class GunController : MonoBehaviour {
         gunHolder.sortingOrder = -1;
     }
 
-    public void ClearBullets() {
-        while (BulletHolder.childCount > 0) Destroy(BulletHolder.GetChild(0));
+    public void ClearBullets () {
+        foreach (Transform child in BulletHolder.transform) {
+            GameObject.Destroy (child.gameObject);
+        }
     }
 
     public void Shoot (Vector2 dir) {

@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HeartsController : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class HeartsController : MonoBehaviour {
+    [SerializeField]
+    private Image[] hearts;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void UpdateHealth(int amt) {
+        amt = Mathf.Clamp(amt, 0, 4);
+        for (int i = 0; i < 4; i++) {
+            Color tint = hearts[i].color;
+            tint.a = (i < (amt)) ? 1 : 0.26f;
+            hearts[i].color = tint;
+        }
     }
 }
